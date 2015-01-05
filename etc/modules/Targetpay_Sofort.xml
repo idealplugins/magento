@@ -1,0 +1,12 @@
+<config>
+    <modules>
+        <Targetpay_Sofort>
+            <active>true</active>
+            <codePool>local</codePool>
+            <version>0.1.1</version>                    
+            <depends>
+                <Mage_Payment />
+            </depends>
+        </Targetpay_Sofort>
+    </modules>
+</config>

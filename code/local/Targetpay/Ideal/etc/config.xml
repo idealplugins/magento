@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Targetpay_Ideal>
+          <version>0.1.1</version>
+       </Targetpay_Ideal>
+    </modules>
+
+    <global>
+        <blocks>
+            <ideal>
+                <class>Targetpay_Ideal_Block</class>
+            </ideal>
+        </blocks>
+
+        <models>
+            <ideal>
+                <class>Targetpay_Ideal_Model</class>
+            </ideal>
+        </models>
+
+        <resources>
+            <ideal_setup>
+                <setup>
+                    <module>Targetpay_Ideal</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                    </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ideal_setup>
+            <ideal_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </ideal_write>
+            <ideal_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </ideal_read>
+        </resources>
+    </global>
+
+    <frontend>
+        <routers>
+            <ideal>
+                <use>standard</use>
+                <args>
+                    <module>Targetpay_Ideal</module>
+                    <frontName>ideal</frontName>
+                </args>
+            </ideal>
+        </routers>
+    </frontend>
+
+    <default>
+        <payment>
+            <ideal>
+                <sort_order>1</sort_order>
+                <active>1</active>
+                <rtlo>94103</rtlo> <!-- // Default TargetPay -->
+                <model>ideal/ideal</model>
+                <order_status>1</order_status>
+                <complete_status>4</complete_status>
+                <autocreate_invoice>1</autocreate_invoice>
+                <title>iDEAL</title>
+            </ideal>
+         </payment>
+    </default>
+</config>

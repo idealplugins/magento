@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Targetpay_Mrcash>
+          <version>0.1.1</version>
+       </Targetpay_Mrcash>
+    </modules>
+
+    <global>
+        <models>
+            <mrcash>
+                <class>Targetpay_Mrcash_Model</class>
+            </mrcash>
+        </models>
+
+        <resources>
+            <mrcash_setup>
+                <setup>
+                    <module>Targetpay_Mrcash</module>
+			        <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                    </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </mrcash_setup>
+            <mrcash_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </mrcash_write>
+            <mrcash_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </mrcash_read>
+        </resources>
+    </global>
+
+	<frontend>
+		<routers>
+			<mrcash>
+				<use>standard</use>
+				<args>
+					<module>Targetpay_Mrcash</module>
+					<frontName>mrcash</frontName>
+				</args>
+			</mrcash>
+		</routers>
+	</frontend>
+
+    <default>
+        <payment>
+            <mrcash>
+                <sort_order>2</sort_order>
+				<active>1</active>
+                <rtlo>94103</rtlo> <!-- // Default TargetPay -->
+				<model>mrcash/mrcash</model>
+                <order_status>1</order_status>
+                <complete_status>4</complete_status>
+				<autocreate_invoice>1</autocreate_invoice>
+				<title>Bancontact/Mister Cash</title>
+            </mrcash>
+         </payment>
+    </default>
+</config>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Targetpay_Paysafecard>
+          <version>0.1.1</version>
+       </Targetpay_Paysafecard>
+    </modules>
+
+    <global>
+        <models>
+            <paysafecard>
+                <class>Targetpay_Paysafecard_Model</class>
+            </paysafecard>
+        </models>
+
+        <resources>
+            <paysafecard_setup>
+                <setup>
+                    <module>Targetpay_Paysafecard</module>
+			        <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                    </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </paysafecard_setup>
+            <paysafecard_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </paysafecard_write>
+            <paysafecard_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </paysafecard_read>
+        </resources>
+    </global>
+
+	<frontend>
+		<routers>
+			<paysafecard>
+				<use>standard</use>
+				<args>
+					<module>Targetpay_Paysafecard</module>
+					<frontName>paysafecard</frontName>
+				</args>
+			</paysafecard>
+		</routers>
+	</frontend>
+
+    <default>
+        <payment>
+            <paysafecard>
+                <sort_order>5</sort_order>
+				<active>1</active>
+                <rtlo>94103</rtlo> <!-- // Default TargetPay -->
+				<model>paysafecard/paysafecard</model>
+                <order_status>1</order_status>
+                <complete_status>4</complete_status>
+				<autocreate_invoice>1</autocreate_invoice>
+				<title>Paysafecard</title>
+            </paysafecard>
+         </payment>
+    </default>
+</config>

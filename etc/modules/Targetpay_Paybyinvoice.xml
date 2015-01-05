@@ -1,0 +1,12 @@
+<config>
+    <modules>
+        <Targetpay_Paybyinvoice>
+            <active>false</active>
+            <codePool>local</codePool>
+            <version>2.1</version>                    
+            <depends>
+                <Mage_Payment />
+            </depends>
+        </Targetpay_Paybyinvoice>
+    </modules>
+</config>
