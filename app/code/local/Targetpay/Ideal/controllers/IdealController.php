@@ -82,7 +82,7 @@ class Targetpay_Ideal_IdealController extends Mage_Core_Controller_Front_Action
 		$testMode = (bool) Mage::getStoreConfig('payment/ideal/testmode');
 		if ($testMode) {
 			$paymentStatus = true; // Always OK if in testmode
-			echo "Testmode ";
+			echo "Testmode... ";
 		}
 
 		if ($paymentStatus) {
@@ -105,19 +105,22 @@ class Targetpay_Ideal_IdealController extends Mage_Core_Controller_Front_Action
 				$order->sendNewOrderEmail();
 				$order->setEmailSent(true);
 				$order->save();
-				echo "Order updated ";
+				echo "Paid... ";
+                } else {
+                echo "Already completed, skipped... ";
                 }
 
 			} else {
-            $sql = "UPDATE `targetpay` SET `targetpay_response` = '".preg_replace("/[^a-z \d\-\_]/i", "", $targetPay->getErrorMessage())."' ".
-            	   "WHERE `order_id` = '".$orderId."' AND method='".$this->_tp_method."'";
-			Mage::getSingleton('core/resource')->getConnection('core_write')->query($sql);
-			echo "Error response ";
+   //          $sql = "UPDATE `targetpay` SET `targetpay_response` = '".preg_replace("/[^a-z \d\-\_]/i", "", $targetPay->getErrorMessage())."' ".
+   //          	   "WHERE `order_id` = '".$orderId."' AND method='".$this->_tp_method."'";
+			// Mage::getSingleton('core/resource')->getConnection('core_write')->query($sql);
+
+			echo "Not paid " . $targetPay->getErrorMessage(). "... ";
             }
 
-        echo "45000";
+        echo "(Magento, 23-04-2015)";
         die();
-		}
+		} 
 	}
 
 ?>
