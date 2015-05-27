@@ -59,7 +59,7 @@
             <sofort>
 				<sort_order>3</sort_order>
 				<active>1</active>
-                <rtlo>94103</rtlo> <!-- // Default TargetPay -->
+                <rtlo>93929</rtlo> <!-- // Default TargetPay -->
 				<model>sofort/sofort</model>
                 <order_status>1</order_status>
                 <complete_status>4</complete_status>
