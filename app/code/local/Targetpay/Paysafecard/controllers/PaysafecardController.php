@@ -37,7 +37,8 @@ class Targetpay_Paysafecard_PaysafecardController extends Mage_Core_Controller_F
        	$paysafecardModel = Mage::getSingleton('paysafecard/paysafecard');
 
 		$orderId = (int) $this->getRequest()->get('order_id');
-		$sql = "SELECT `paid` FROM `targetpay` WHERE `order_id` = '".$orderId."' AND method='".$this->_tp_method."'";
+		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+		$sql = "SELECT `paid` FROM `targetpay` WHERE `order_id` = '".$write->quote($orderId)."' AND method='".$write->quote($this->_tp_method)."'";
 		$result = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll($sql);
     	$paid = $result[0]['paid'];
 
@@ -70,7 +71,8 @@ class Targetpay_Paysafecard_PaysafecardController extends Mage_Core_Controller_F
 		$paysafecardModel = Mage::getSingleton('paysafecard/paysafecard');
 
 		$orderId = (int) $this->getRequest()->get('order_id');
-		$sql = "SELECT max(`targetpay_txid`) AS txid FROM `targetpay` WHERE `order_id` = '".$orderId."' AND method='".$this->_tp_method."'";
+		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+		$sql = "SELECT max(`targetpay_txid`) AS txid FROM `targetpay` WHERE `order_id` = '".$write->quote($orderId)."' AND method='".$write->quote($this->_tp_method)."'";
 		$result = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll($sql);
 		$txid = $result[0]['txid'];
 

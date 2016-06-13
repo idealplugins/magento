@@ -75,7 +75,7 @@ class Targetpay_Sofort_Model_Sofort extends Mage_Payment_Model_Method_Abstract
 			}
 
 		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
-		$write->query("INSERT INTO `targetpay` SET `order_id`='".$orderId."', `method`='".$this->_tp_method."', `targetpay_txid`='".$targetPay->getTransactionId()."'");
+		$write->query("INSERT INTO `targetpay` SET `order_id`='".$write->quote($orderId)."', `method`='".$write->quote($this->_tp_method)."', `targetpay_txid`='".$write->quote($targetPay->getTransactionId())."'");
 
 		return $bankUrl;
 		}
