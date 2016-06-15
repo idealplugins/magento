@@ -72,9 +72,14 @@ class Targetpay_Paybyinvoice_PaybyinvoiceController extends Mage_Core_Controller
 
 		$orderId = (int) $this->getRequest()->get('order_id');
 		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
-		$sql = "SELECT max(`targetpay_txid`) AS txid FROM `targetpay` WHERE `order_id` = '".$write->quote($orderId)."' AND method='".$write->quote($this->_tp_method)."'";
+		$sql = "SELECT max(`targetpay_txid`) AS txid, `paid` FROM `targetpay` WHERE `order_id` = '".$write->quote($orderId)."' AND method='".$write->quote($this->_tp_method)."'";
 		$result = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll($sql);
 		$txid = $result[0]['txid'];
+		$alreadyPaid = ((!empty($result[0]['paid'])) ? true : false);
+		if($alreadyPaid) {
+			die('callback already processed');
+		}
+		
 
 		$language = (Mage::app()->getLocale()->getLocaleCode() == 'nl_NL') ? "nl" : "en";
 		$targetPay = new TargetPayCore ($this->_tp_method, Mage::getStoreConfig('payment/paybyinvoice/rtlo'), "f8ca4794a1792886bb88060ca0685c1e", $language, false);
@@ -87,7 +92,7 @@ class Targetpay_Paybyinvoice_PaybyinvoiceController extends Mage_Core_Controller
 		}
 
 		if ($paymentStatus) {
-			$sql = "UPDATE `targetpay` SET `paid` = now() WHERE `order_id` = '".$orderId."' AND method='".$this->_tp_method."'";
+			$sql = "UPDATE `targetpay` SET `paid` = now() WHERE `order_id` = '".$orderId."' AND method='".$this->_tp_method."' AND `targetpay_txid` = '".$txid."'";
 			Mage::getSingleton('core/resource')->getConnection('core_write')->query($sql);
 
 			$order = Mage::getModel('sales/order')->loadByIncrementId($orderId);
