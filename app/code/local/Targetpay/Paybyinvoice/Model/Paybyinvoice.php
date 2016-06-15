@@ -160,7 +160,7 @@ class Targetpay_Paybyinvoice_Model_Paybyinvoice extends Mage_Payment_Model_Metho
 			}
 
 		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
-		$write->query("INSERT INTO `targetpay` SET `order_id`='".$write->quote($orderId)."', `method`='".$write->quote($this->_tp_method)."', `targetpay_txid`='".$write->quote($targetPay->getTransactionId())."'");
+		$write->query("INSERT INTO `targetpay` SET `order_id`=".$write->quote($orderId).", `method`=".$write->quote($this->_tp_method).", `targetpay_txid`=".$write->quote($targetPay->getTransactionId()));
 
 		return $bankUrl;
 		}

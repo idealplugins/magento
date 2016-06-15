@@ -39,7 +39,7 @@ class Targetpay_Creditcard_CreditcardController extends Mage_Core_Controller_Fro
 
 		$orderId = (int) $this->getRequest()->get('order_id');
 		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
-		$sql = "SELECT `paid` FROM `targetpay` WHERE `order_id` = '".$write->quote($orderId)."' AND method='".$write->quote($this->_tp_method)."'";
+		$sql = "SELECT `paid` FROM `targetpay` WHERE `order_id` = ".$write->quote($orderId)." AND method=".$write->quote($this->_tp_method);
 		$result = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll($sql);
     	$paid = $result[0]['paid'];
 
@@ -73,7 +73,7 @@ class Targetpay_Creditcard_CreditcardController extends Mage_Core_Controller_Fro
 
 		$orderId = (int) $this->getRequest()->get('order_id');
 		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
-		$sql = "SELECT max(`targetpay_txid`) AS txid, `paid` FROM `targetpay` WHERE `order_id` = '".$write->quote($orderId)."' AND method='".$write->quote($this->_tp_method)."'";
+		$sql = "SELECT max(`targetpay_txid`) AS txid, `paid` FROM `targetpay` WHERE `order_id` = ".$write->quote($orderId)." AND method=".$write->quote($this->_tp_method);
 		$result = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll($sql);
 		$txid = $result[0]['txid'];
 		$alreadyPaid = ((!empty($result[0]['paid'])) ? true : false);
