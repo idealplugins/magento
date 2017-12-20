@@ -12,81 +12,45 @@
  *  
  *  v2.1	Added pay by invoice
  */
+require_once (BP . DS . 'app' . DS . 'code' . DS . 'local' . DS . "Targetpay" . DS . "targetpay.class.php");
+require_once (BP . DS . 'app' . DS . 'code' . DS . 'local' . DS . "Targetpay" . DS . "Base_Targetpay_Model.php");
 
-require_once (BP . DS . 'app' . DS . 'code' . DS . 'local' . DS. "Targetpay" . DS . "targetpay.class.php");
-
-class Targetpay_Paysafecard_Model_Paysafecard extends Mage_Payment_Model_Method_Abstract
-	{
+class Targetpay_Paysafecard_Model_Paysafecard extends Base_Targetpay_Model
+{
 
     protected $_code = 'paysafecard';
-    protected $_isGateway               = true;
-    protected $_canAuthorize            = true;
-    protected $_canCapture              = true;
-    protected $_canCapturePartial       = false;
-    protected $_canRefund               = false;
-    protected $_canVoid                 = true;
-    protected $_canUseInternal          = true;
-    protected $_canUseCheckout          = true;
-    protected $_canUseForMultishipping  = true;
-    protected $_canSaveCc 				= false;
 
-    protected $_tp_method 				= "WAL";
-                                                                
-    /**
-     * 	Prepare redirect that starts TargetPay payment
-     */
+    protected $_isGateway = true;
 
-	public function getOrderPlaceRedirectUrl() {
-		return Mage::getUrl('paysafecard/paysafecard/redirect', array('_secure' => true));
-		}
+    protected $_canAuthorize = true;
 
-    /**
-     * 	Start payment
-     */
+    protected $_canCapture = true;
 
-	public function setupPayment($bankId = false) {
+    protected $_canCapturePartial = false;
 
-    	$lastOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
-		$order = Mage::getModel('sales/order')->load($lastOrderId);
+    protected $_canRefund = true;
 
-		if (!$order->getId()) {
-			Mage::throwException('Cannot load order #' . $lastOrderId);
-			}
+    protected $_canVoid = true;
 
-		if($order->getGrandTotal() < 0.10) {
-			Mage::throwException('The total amount should be at least 0.85');
-			}
+    protected $_canUseInternal = true;
 
-        if($order->getGrandTotal() > 150) {
-            Mage::throwException('The total amount cannot exceed 150 euro');
-            }
+    protected $_canUseCheckout = true;
 
-		$orderId = $order->getRealOrderId();
-		$language = (Mage::app()->getLocale()->getLocaleCode() == 'nl_NL') ? "nl" : "en";
-		$targetPay = new TargetPayCore ($this->_tp_method, Mage::getStoreConfig('payment/paysafecard/rtlo'), "f8ca4794a1792886bb88060ca0685c1e", $language, false);
-		$targetPay->setAmount ( round($order->getGrandTotal() * 100));
-		$targetPay->setDescription ( "Order #". $orderId );
-		$targetPay->setReturnUrl ( Mage::getUrl('paysafecard/paysafecard/return', array('_secure' => true, 'order_id' => $orderId) ));
-		$targetPay->setReportUrl ( Mage::getUrl('paysafecard/paysafecard/report', array('_secure' => true, 'order_id' => $orderId) ));
-		$bankUrl = $targetPay->startPayment();
+    protected $_canUseForMultishipping = true;
 
-		if (!$bankUrl) {
-			Mage::throwException("TargetPay error: ". $targetPay->getErrorMessage() );
-			}
+    protected $_canSaveCc = false;
 
-		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
-		$write->query("INSERT INTO `targetpay` SET `order_id`=".$write->quote($orderId).", `method`=".$write->quote($this->_tp_method).", `targetpay_txid`=".$write->quote($targetPay->getTransactionId()));
-
-		return $bankUrl;
-		}
-
+    protected $_tp_method = "WAL";
 
     /**
-     * 	Not implemented here
+     * Prepare redirect that starts TargetPay payment
      */
-
-	public function validatePayment($sOrderId) {
-		}
-	}
+    public function getOrderPlaceRedirectUrl()
+    {
+        return Mage::getUrl('paysafecard/paysafecard/redirect', array(
+            '_secure' => true
+        ));
+    }
+}
 
 ?>

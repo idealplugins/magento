@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Targetpay_Bankwire>
+            <version>0.1.2</version>  <!-- from 0.1.1 to 0.1.2 -->
+        </Targetpay_Bankwire>
+    </modules>
+
+    <global>
+        <models>
+            <bankwire>
+                <class>Targetpay_Bankwire_Model</class>
+            </bankwire>
+        </models>
+
+        <resources>
+            <bankwire_setup>
+                <setup>
+                    <module>Targetpay_Bankwire</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup
+                    </class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </bankwire_setup>
+            <bankwire_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </bankwire_write>
+            <bankwire_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </bankwire_read>
+        </resources>
+    </global>
+
+    <frontend>
+        <routers>
+            <bankwire>
+                <use>standard</use>
+                <args>
+                    <module>Targetpay_Bankwire</module>
+                    <frontName>bankwire</frontName>
+                </args>
+            </bankwire>
+        </routers>
+        <layout>
+            <updates>
+                <bankwire>
+                    <file>bankwire.xml</file>
+                </bankwire>
+            </updates>
+        </layout>
+    </frontend>
+
+    <default>
+        <payment>
+            <bankwire>
+                <sort_order>0</sort_order>
+                <active>0</active>
+                <rtlo>39411</rtlo> <!-- // Default TargetPay -->
+                <model>bankwire/bankwire</model>
+                <order_status>1</order_status>
+                <complete_status>4</complete_status>
+                <autocreate_invoice>1</autocreate_invoice>
+                <title>Bankwire</title>
+            </bankwire>
+        </payment>
+    </default>
+</config>

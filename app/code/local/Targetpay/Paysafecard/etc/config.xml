@@ -52,7 +52,7 @@
         <payment>
             <paysafecard>
                 <sort_order>5</sort_order>
-				<active>1</active>
+				<active>0</active>
                 <rtlo>93929</rtlo> <!-- // Default TargetPay -->
 				<model>paysafecard/paysafecard</model>
                 <order_status>1</order_status>

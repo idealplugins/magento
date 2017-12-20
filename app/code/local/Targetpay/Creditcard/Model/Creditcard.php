@@ -13,80 +13,46 @@
  *  v2.1	Added pay by invoice
  *  v2.2 	Added creditcards 
  */
+require_once (BP . DS . 'app' . DS . 'code' . DS . 'local' . DS . "Targetpay" . DS . "targetpay.class.php");
+require_once (BP . DS . 'app' . DS . 'code' . DS . 'local' . DS . "Targetpay" . DS . "Base_Targetpay_Model.php");
 
-require_once (BP . DS . 'app' . DS . 'code' . DS . 'local' . DS. "Targetpay" . DS . "targetpay.class.php");
-
-class Targetpay_Creditcard_Model_Creditcard extends Mage_Payment_Model_Method_Abstract
+class Targetpay_Creditcard_Model_Creditcard extends Base_Targetpay_Model
 {
 
     protected $_code = 'creditcard';
-    protected $_isGateway               = true;
-    protected $_canAuthorize            = true;
-    protected $_canCapture              = true;
-    protected $_canCapturePartial       = false;
-    protected $_canRefund               = false;
-    protected $_canVoid                 = true;
-    protected $_canUseInternal          = true;
-    protected $_canUseCheckout          = true;
-    protected $_canUseForMultishipping  = true;
-    protected $_canSaveCc 				= false;
 
-    protected $_tp_method 				= "CC";
-                                                                
-    /**
-     * 	Prepare redirect that starts TargetPay payment
-     */
+    protected $_isGateway = true;
 
-	public function getOrderPlaceRedirectUrl() 
-	{
-		return Mage::getUrl('creditcard/creditcard/redirect', array('_secure' => true, 'bank_id' => $_POST["payment"]["bank_id"]));
-	}
+    protected $_canAuthorize = true;
 
-    /**
-     * 	Start payment
-     */
+    protected $_canCapture = true;
 
-	public function setupPayment($bankId = false) 
-	{
-    	$lastOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
-		$order = Mage::getModel('sales/order')->load($lastOrderId);
+    protected $_canCapturePartial = false;
 
-		if (!$order->getId()) {
-			Mage::throwException('Cannot load order #' . $lastOrderId);
-		}
+    protected $_canRefund = true;
 
-		if($order->getGrandTotal() < 0.84) {
-			Mage::throwException('The total amount should be at least 0.85');
-		}
+    protected $_canVoid = true;
 
-		$orderId = $order->getRealOrderId();
-		$language = (Mage::app()->getLocale()->getLocaleCode() == 'nl_NL') ? "nl" : "en";
-		$targetPay = new TargetPayCore ($this->_tp_method, Mage::getStoreConfig('payment/creditcard/rtlo'), "f8ca4794a1792886bb88060ca0685c1e", $language, false);
-		$targetPay->setAmount ( round($order->getGrandTotal() * 100));
-		$targetPay->setDescription ( "Order #". $orderId );
-		// $targetPay->setBankId ( $bankId );
-		$targetPay->setReturnUrl ( Mage::getUrl('creditcard/creditcard/return', array('_secure' => true, 'order_id' => $orderId) ));
-		$targetPay->setReportUrl ( Mage::getUrl('creditcard/creditcard/report', array('_secure' => true, 'order_id' => $orderId) ));
-		$bankUrl = $targetPay->startPayment();
+    protected $_canUseInternal = true;
 
-		if (!$bankUrl) {
-			Mage::throwException("TargetPay error: ". $targetPay->getErrorMessage() );
-		}
+    protected $_canUseCheckout = true;
 
-		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
-		$write->query("INSERT INTO `targetpay` SET `order_id`=".$write->quote($orderId).", `method`=".$write->quote($this->_tp_method).", `targetpay_txid`=".$write->quote($targetPay->getTransactionId()));
+    protected $_canUseForMultishipping = true;
 
-		return $bankUrl;
-	}
+    protected $_canSaveCc = false;
 
+    protected $_tp_method = "CC";
 
     /**
-     * 	Not implemented here
+     * Prepare redirect that starts TargetPay payment
      */
-
-	public function validatePayment($sOrderId) 
-	{
-	}
+    public function getOrderPlaceRedirectUrl()
+    {
+        return Mage::getUrl('creditcard/creditcard/redirect', array(
+            '_secure' => true,
+            'bank_id' => $_POST["payment"]["bank_id"]
+        ));
+    }
 
 }
 

@@ -1,65 +1,65 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-       <Targetpay_Creditcard>
-          <version>0.1.1</version>
-       </Targetpay_Creditcard>
+       <Targetpay_Afterpay>
+          <version>0.1.2</version>
+       </Targetpay_Afterpay>
     </modules>
 
     <global>
         <models>
-            <creditcard>
-                <class>Targetpay_Creditcard_Model</class>
-            </creditcard>
+            <afterpay>
+                <class>Targetpay_Afterpay_Model</class>
+            </afterpay>
         </models>
 
         <resources>
-            <creditcard_setup>
+            <afterpay_setup>
                 <setup>
-                    <module>Targetpay_Creditcard</module>
+                    <module>Targetpay_Afterpay</module>
 			        <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
                     </setup>
                 <connection>
                     <use>core_setup</use>
                 </connection>
-            </creditcard_setup>
-            <creditcard_write>
+            </afterpay_setup>
+            <afterpay_write>
                 <connection>
                   <use>core_write</use>
                 </connection>
-            </creditcard_write>
-            <creditcard_read>
+            </afterpay_write>
+            <afterpay_read>
                <connection>
                 <use>core_read</use>
               </connection>
-            </creditcard_read>
+            </afterpay_read>
         </resources>
     </global>
 
 	<frontend>
 		<routers>
-			<creditcard>
+			<afterpay>
 				<use>standard</use>
 				<args>
-					<module>Targetpay_Creditcard</module>
-					<frontName>creditcard</frontName>
+					<module>Targetpay_Afterpay</module>
+					<frontName>afterpay</frontName>
 				</args>
-			</creditcard>
+			</afterpay>
 		</routers>
 	</frontend>
 
     <default>
         <payment>
-            <creditcard>
-                <sort_order>2</sort_order>
-				<active>0</active>
+            <afterpay>
+                <sort_order>1</sort_order>
+				<active>1</active>
                 <rtlo>93929</rtlo> <!-- // Default TargetPay -->
-				<model>creditcard/creditcard</model>
+				<model>afterpay/afterpay</model>
                 <order_status>1</order_status>
                 <complete_status>4</complete_status>
 				<autocreate_invoice>1</autocreate_invoice>
-				<title>Creditcard</title>
-            </creditcard>
+				<title>Afterpay</title>
+            </afterpay>
          </payment>
     </default>
 </config>

@@ -57,7 +57,7 @@
     <default>
         <payment>
             <ideal>
-                <sort_order>1</sort_order>
+                <sort_order>2</sort_order>
                 <active>1</active>
                 <rtlo>93929</rtlo> <!-- // Default TargetPay -->
                 <model>ideal/ideal</model>

@@ -1,65 +1,65 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-       <Targetpay_Creditcard>
+       <Targetpay_Paypaltm>
           <version>0.1.1</version>
-       </Targetpay_Creditcard>
+       </Targetpay_Paypaltm>
     </modules>
 
     <global>
         <models>
-            <creditcard>
-                <class>Targetpay_Creditcard_Model</class>
-            </creditcard>
+            <paypaltm>
+                <class>Targetpay_Paypaltm_Model</class>
+            </paypaltm>
         </models>
 
         <resources>
-            <creditcard_setup>
+            <paypaltm_setup>
                 <setup>
-                    <module>Targetpay_Creditcard</module>
+                    <module>Targetpay_Paypaltm</module>
 			        <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
                     </setup>
                 <connection>
                     <use>core_setup</use>
                 </connection>
-            </creditcard_setup>
-            <creditcard_write>
+            </paypaltm_setup>
+            <paypaltm_write>
                 <connection>
                   <use>core_write</use>
                 </connection>
-            </creditcard_write>
-            <creditcard_read>
+            </paypaltm_write>
+            <paypaltm_read>
                <connection>
                 <use>core_read</use>
               </connection>
-            </creditcard_read>
+            </paypaltm_read>
         </resources>
     </global>
 
 	<frontend>
 		<routers>
-			<creditcard>
+			<paypaltm>
 				<use>standard</use>
 				<args>
-					<module>Targetpay_Creditcard</module>
-					<frontName>creditcard</frontName>
+					<module>Targetpay_Paypaltm</module>
+					<frontName>paypaltm</frontName>
 				</args>
-			</creditcard>
+			</paypaltm>
 		</routers>
 	</frontend>
 
     <default>
         <payment>
-            <creditcard>
-                <sort_order>2</sort_order>
+            <paypaltm>
+                <sort_order>0</sort_order>
 				<active>0</active>
-                <rtlo>93929</rtlo> <!-- // Default TargetPay -->
-				<model>creditcard/creditcard</model>
+                <rtlo>40460</rtlo> <!-- // Default TargetPay -->
+				<model>paypaltm/paypaltm</model>
                 <order_status>1</order_status>
                 <complete_status>4</complete_status>
 				<autocreate_invoice>1</autocreate_invoice>
-				<title>Creditcard</title>
-            </creditcard>
+				<title>Paypal</title>
+            </paypaltm>
          </payment>
     </default>
 </config>

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<layout version="0.1.0">
+    <bankwire_bankwire_thankyou>
+        <reference name="content">
+            <block type="core/template" name="bankwire" template="bankwire/bankwire.phtml"></block>
+        </reference>
+    </bankwire_bankwire_thankyou>
+</layout>

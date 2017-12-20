@@ -51,14 +51,14 @@
     <default>
         <payment>
             <mrcash>
-                <sort_order>2</sort_order>
-				<active>1</active>
+                <sort_order>3</sort_order>
+				<active>0</active>
                 <rtlo>93929</rtlo> <!-- // Default TargetPay -->
 				<model>mrcash/mrcash</model>
                 <order_status>1</order_status>
                 <complete_status>4</complete_status>
 				<autocreate_invoice>1</autocreate_invoice>
-				<title>Bancontact/Mister Cash</title>
+				<title>Bancontact</title>
             </mrcash>
          </payment>
     </default>
