@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-       <Targetpay_Paysafecard>
-          <version>0.1.1</version>
-       </Targetpay_Paysafecard>
+        <Targetpay_Paysafecard>
+            <version>0.1.2</version>
+        </Targetpay_Paysafecard>
     </modules>
 
     <global>
@@ -17,49 +17,50 @@
             <paysafecard_setup>
                 <setup>
                     <module>Targetpay_Paysafecard</module>
-			        <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
-                    </setup>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
                 <connection>
                     <use>core_setup</use>
                 </connection>
             </paysafecard_setup>
             <paysafecard_write>
                 <connection>
-                  <use>core_write</use>
+                    <use>core_write</use>
                 </connection>
             </paysafecard_write>
             <paysafecard_read>
-               <connection>
-                <use>core_read</use>
-              </connection>
+                <connection>
+                    <use>core_read</use>
+                </connection>
             </paysafecard_read>
         </resources>
     </global>
 
-	<frontend>
-		<routers>
-			<paysafecard>
-				<use>standard</use>
-				<args>
-					<module>Targetpay_Paysafecard</module>
-					<frontName>paysafecard</frontName>
-				</args>
-			</paysafecard>
-		</routers>
-	</frontend>
+    <frontend>
+        <routers>
+            <paysafecard>
+                <use>standard</use>
+                <args>
+                    <module>Targetpay_Paysafecard</module>
+                    <frontName>paysafecard</frontName>
+                </args>
+            </paysafecard>
+        </routers>
+    </frontend>
 
     <default>
         <payment>
             <paysafecard>
                 <sort_order>5</sort_order>
-				<active>0</active>
+                <active>0</active>
                 <rtlo>93929</rtlo> <!-- // Default TargetPay -->
-				<model>paysafecard/paysafecard</model>
+                <token></token> <!-- you can obtain your api key in your organization dashboard on https://digiwallet.nl -->
+                <model>paysafecard/paysafecard</model>
                 <order_status>1</order_status>
                 <complete_status>4</complete_status>
-				<autocreate_invoice>1</autocreate_invoice>
-				<title>Paysafecard</title>
+                <autocreate_invoice>1</autocreate_invoice>
+                <title>Paysafecard</title>
             </paysafecard>
-         </payment>
+        </payment>
     </default>
 </config>
