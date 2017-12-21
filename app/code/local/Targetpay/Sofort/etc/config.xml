@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-       <Targetpay_Sofort>
-          <version>0.1.1</version>
-       </Targetpay_Sofort>
+        <Targetpay_Sofort>
+            <version>0.1.2</version>
+        </Targetpay_Sofort>
     </modules>
 
     <global>
-    <blocks>
-        <sofort>
-            <class>Targetpay_Sofort_Block</class>
-        </sofort>
-    </blocks>
+        <blocks>
+            <sofort>
+                <class>Targetpay_Sofort_Block</class>
+            </sofort>
+        </blocks>
 
         <models>
             <sofort>
@@ -23,49 +23,50 @@
             <sofort_setup>
                 <setup>
                     <module>Targetpay_Sofort</module>
-			        <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
-                    </setup>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
                 <connection>
                     <use>core_setup</use>
                 </connection>
             </sofort_setup>
             <sofort_write>
                 <connection>
-                  <use>core_write</use>
+                    <use>core_write</use>
                 </connection>
             </sofort_write>
             <sofort_read>
-               <connection>
-                <use>core_read</use>
-              </connection>
+                <connection>
+                    <use>core_read</use>
+                </connection>
             </sofort_read>
         </resources>
     </global>
 
-	<frontend>
-		<routers>
-			<sofort>
-				<use>standard</use>
-				<args>
-					<module>Targetpay_Sofort</module>
-					<frontName>sofort</frontName>
-				</args>
-			</sofort>
-		</routers>
-	</frontend>
+    <frontend>
+        <routers>
+            <sofort>
+                <use>standard</use>
+                <args>
+                    <module>Targetpay_Sofort</module>
+                    <frontName>sofort</frontName>
+                </args>
+            </sofort>
+        </routers>
+    </frontend>
 
     <default>
         <payment>
             <sofort>
-				<sort_order>3</sort_order>
-				<active>0</active>
+                <sort_order>3</sort_order>
+                <active>0</active>
                 <rtlo>93929</rtlo> <!-- // Default TargetPay -->
-				<model>sofort/sofort</model>
+                <token></token> <!-- you can obtain your api key in your organization dashboard on https://digiwallet.nl -->
+                <model>sofort/sofort</model>
                 <order_status>1</order_status>
                 <complete_status>4</complete_status>
-				<autocreate_invoice>1</autocreate_invoice>
-				<title>Sofort</title>
+                <autocreate_invoice>1</autocreate_invoice>
+                <title>Sofort</title>
             </sofort>
-         </payment>
+        </payment>
     </default>
 </config>

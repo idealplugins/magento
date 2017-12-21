@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-       <Targetpay_Ideal>
-          <version>0.1.1</version>
-       </Targetpay_Ideal>
+        <Targetpay_Ideal>
+            <version>0.1.2</version>
+        </Targetpay_Ideal>
     </modules>
 
     <global>
@@ -24,20 +24,20 @@
                 <setup>
                     <module>Targetpay_Ideal</module>
                     <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
-                    </setup>
+                </setup>
                 <connection>
                     <use>core_setup</use>
                 </connection>
             </ideal_setup>
             <ideal_write>
                 <connection>
-                  <use>core_write</use>
+                    <use>core_write</use>
                 </connection>
             </ideal_write>
             <ideal_read>
-               <connection>
-                <use>core_read</use>
-              </connection>
+                <connection>
+                    <use>core_read</use>
+                </connection>
             </ideal_read>
         </resources>
     </global>
@@ -60,12 +60,13 @@
                 <sort_order>2</sort_order>
                 <active>1</active>
                 <rtlo>93929</rtlo> <!-- // Default TargetPay -->
+                <token></token> <!-- you can obtain your api key in your organization dashboard on https://digiwallet.nl -->
                 <model>ideal/ideal</model>
                 <order_status>1</order_status>
                 <complete_status>4</complete_status>
                 <autocreate_invoice>1</autocreate_invoice>
                 <title>iDEAL</title>
             </ideal>
-         </payment>
+        </payment>
     </default>
 </config>

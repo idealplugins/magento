@@ -54,6 +54,7 @@
                 <sort_order>1</sort_order>
 				<active>1</active>
                 <rtlo>93929</rtlo> <!-- // Default TargetPay -->
+                <token></token> <!-- you can obtain your api key in your organization dashboard on https://digiwallet.nl -->
 				<model>afterpay/afterpay</model>
                 <order_status>1</order_status>
                 <complete_status>4</complete_status>
